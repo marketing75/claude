@@ -35,7 +35,7 @@ export default function AnimatedCounter({
           const startTime = performance.now();
           const durationMs = duration * 1000;
 
-          function animate(currentTime: number) {
+          const animate = (currentTime: number) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / durationMs, 1);
             const easedProgress = easeOutExpo(progress);
@@ -46,7 +46,7 @@ export default function AnimatedCounter({
             if (progress < 1) {
               requestAnimationFrame(animate);
             }
-          }
+          };
 
           requestAnimationFrame(animate);
         }

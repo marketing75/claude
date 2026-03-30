@@ -14,11 +14,10 @@ function AnimatedNumber({ target, suffix, active }: { target: number; suffix: st
 
   useEffect(() => {
     if (!active) return;
-    let start = 0;
     const duration = 2000;
     const startTime = performance.now();
 
-    function tick(now: number) {
+    const tick = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
