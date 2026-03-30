@@ -33,36 +33,50 @@ export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-gray-50 py-20 lg:py-28">
+    <section className="relative bg-gray-50 py-24 lg:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-14 text-center">
+        <div className="mb-16 text-center">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            FAQ
+          </span>
           <h2
-            className="text-3xl font-bold text-gray-900 sm:text-4xl"
+            className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-[2.75rem]"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Frequently Asked Questions
           </h2>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        <div className="space-y-3">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
-              <div key={i} className="py-5">
+              <div
+                key={i}
+                className={`rounded-2xl border transition-all duration-300 ${
+                  isOpen
+                    ? 'border-blue-200 bg-white shadow-md'
+                    : 'border-gray-100 bg-white hover:border-gray-200'
+                }`}
+              >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between text-left"
+                  className="flex w-full items-center justify-between p-6 text-left"
                 >
                   <span className="pr-4 text-lg font-semibold text-gray-900">
                     {faq.q}
                   </span>
                   <span
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-transform duration-300"
-                    style={{
-                      transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                    }}
+                    className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                      isOpen
+                        ? 'bg-blue-500 text-white rotate-45'
+                        : 'bg-gray-100 text-gray-500'
+                    }`}
                   >
-                    +
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
                   </span>
                 </button>
                 <div
@@ -73,7 +87,7 @@ export default function FaqAccordion() {
                   }}
                 >
                   <div className="min-h-0">
-                    <p className="pt-4 text-gray-600 leading-relaxed">
+                    <p className="px-6 pb-6 text-gray-500 leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
