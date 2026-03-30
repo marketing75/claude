@@ -58,16 +58,16 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
           scrolled
-            ? 'bg-white/95 backdrop-blur-[20px] shadow-sm'
+            ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.04)] border-b border-gray-100/50'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Left: Logo */}
-            <Link href="/" className="flex items-center gap-1 shrink-0">
+            <Link href="/" className="flex items-center gap-1.5 shrink-0">
               <svg
                 width="32"
                 height="32"
@@ -87,13 +87,13 @@ export default function Navbar() {
               </svg>
               <span className="text-xl tracking-tight">
                 <span
-                  className={`font-bold ${scrolled ? 'text-blue' : 'text-white'}`}
+                  className={`font-bold transition-colors duration-300 ${scrolled ? 'text-blue-500' : 'text-white'}`}
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   Net
                 </span>
                 <span
-                  className={`${scrolled ? 'text-gray-900' : 'text-white'}`}
+                  className={`transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   Trackers
@@ -122,11 +122,11 @@ export default function Navbar() {
                         className={`relative text-sm font-medium transition-colors py-2 group ${
                           isActive
                             ? scrolled
-                              ? 'text-blue'
+                              ? 'text-blue-500'
                               : 'text-white'
                             : scrolled
-                              ? 'text-gray-700 hover:text-blue'
-                              : 'text-white/80 hover:text-white'
+                              ? 'text-gray-600 hover:text-gray-900'
+                              : 'text-white/70 hover:text-white'
                         }`}
                       >
                         {link.label}
@@ -144,7 +144,7 @@ export default function Navbar() {
                           />
                         </svg>
                         <span
-                          className={`absolute left-0 -bottom-1 h-0.5 bg-blue transition-all duration-300 ${
+                          className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-blue-500 transition-all duration-300 ${
                             isActive ? 'w-full' : 'w-0 group-hover:w-full'
                           }`}
                         />
@@ -160,16 +160,16 @@ export default function Navbar() {
                     className={`relative text-sm font-medium transition-colors py-2 group ${
                       isActive
                         ? scrolled
-                          ? 'text-blue'
+                          ? 'text-blue-500'
                           : 'text-white'
                         : scrolled
-                          ? 'text-gray-700 hover:text-blue'
-                          : 'text-white/80 hover:text-white'
+                          ? 'text-gray-600 hover:text-gray-900'
+                          : 'text-white/70 hover:text-white'
                     }`}
                   >
                     {link.label}
                     <span
-                      className={`absolute left-0 -bottom-1 h-0.5 bg-blue transition-all duration-300 ${
+                      className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-blue-500 transition-all duration-300 ${
                         isActive ? 'w-full' : 'w-0 group-hover:w-full'
                       }`}
                     />
@@ -184,17 +184,18 @@ export default function Navbar() {
                 href="tel:02079460958"
                 className={`text-sm font-medium transition-colors ${
                   scrolled
-                    ? 'text-gray-700 hover:text-blue'
-                    : 'text-white/80 hover:text-white'
+                    ? 'text-gray-600 hover:text-gray-900'
+                    : 'text-white/70 hover:text-white'
                 }`}
               >
                 020 7946 0958
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-blue rounded-full hover:bg-blue/90 transition-colors"
+                className="relative inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
               >
-                Book a Strategy Call
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600" />
+                <span className="relative z-10">Book a Strategy Call</span>
               </a>
             </div>
 
@@ -206,7 +207,7 @@ export default function Navbar() {
               aria-label="Open menu"
             >
               <svg
-                className={`w-6 h-6 ${scrolled ? 'text-gray-900' : 'text-white'}`}
+                className={`w-6 h-6 transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

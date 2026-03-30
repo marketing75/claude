@@ -88,13 +88,16 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0D1117] text-white">
+    <footer className="relative bg-[#0A0E17] text-white overflow-hidden">
+      {/* Gradient line at top */}
+      <div className="h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section */}
         <div className="pt-16 pb-12 grid grid-cols-1 lg:grid-cols-6 gap-12">
           {/* Logo & Tagline */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-1 mb-4">
+            <Link href="/" className="flex items-center gap-1.5 mb-5">
               <svg
                 width="32"
                 height="32"
@@ -114,7 +117,7 @@ export default function Footer() {
               </svg>
               <span className="text-xl tracking-tight">
                 <span
-                  className="font-bold text-blue"
+                  className="font-bold text-blue-500"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   Net
@@ -127,12 +130,12 @@ export default function Footer() {
                 </span>
               </span>
             </Link>
-            <p className="text-gray-400 text-base leading-relaxed mb-6">
+            <p className="text-gray-400 text-base leading-relaxed mb-6 max-w-xs">
               Get Found. Look Good. Grow.
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -140,7 +143,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-gray-500 hover:text-white transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] text-gray-500 hover:text-white hover:bg-white/[0.08] hover:border-white/10 transition-all duration-300"
                 >
                   {social.icon}
                 </a>
@@ -151,7 +154,7 @@ export default function Footer() {
           {/* Link Columns */}
           {footerColumns.map((column) => (
             <div key={column.title}>
-              <h3 className="text-white font-semibold text-sm mb-4">
+              <h3 className="text-white font-semibold text-sm mb-5">
                 {column.title}
               </h3>
               <ul className="space-y-3">
@@ -159,7 +162,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                      className="text-gray-500 hover:text-gray-300 transition-colors text-sm"
                     >
                       {link.label}
                     </Link>
@@ -171,28 +174,26 @@ export default function Footer() {
         </div>
 
         {/* Bottom Strip */}
-        <div className="border-t border-white/10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm text-center sm:text-left">
+        <div className="border-t border-white/[0.06] py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-600 text-sm text-center sm:text-left">
             &copy; 2024 NetTrackers Digital Ltd. Registered in England &amp; Wales.
           </p>
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-6 text-sm">
             <Link
               href="/privacy-policy"
-              className="text-gray-500 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-300 transition-colors"
             >
               Privacy Policy
             </Link>
-            <span className="text-gray-700">|</span>
             <Link
               href="/terms-and-conditions"
-              className="text-gray-500 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-300 transition-colors"
             >
               Terms &amp; Conditions
             </Link>
-            <span className="text-gray-700">|</span>
             <Link
               href="/cookie-policy"
-              className="text-gray-500 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-300 transition-colors"
             >
               Cookie Policy
             </Link>
