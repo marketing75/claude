@@ -1,79 +1,110 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const faqs = [
   {
-    q: 'How long does SEO take to show results?',
-    a: 'Most clients see measurable improvements within 3-6 months. SEO is a long-term investment, and while some quick wins are possible in the first few weeks, sustainable rankings and traffic growth typically require consistent effort over several months. We provide monthly progress reports so you can track improvements from day one.',
+    q: 'How long before we see SEO results?',
+    a: 'Most clients see measurable improvements within 3-4 months, with significant ranking jumps by month 6. We set clear milestones so you can track progress from day one. Our approach is data-driven, meaning we continuously optimise based on what\'s working.',
   },
   {
-    q: 'What is your minimum contract length?',
-    a: 'We operate on rolling monthly contracts with no long-term lock-ins. We believe in earning your business every month through transparent reporting and demonstrable results. You can cancel with 30 days\u2019 notice at any time.',
+    q: 'Do we have to sign a long-term contract?',
+    a: 'No. We offer rolling monthly agreements because we believe in earning your business every month through results, not locking you in. Most of our clients choose to stay because the ROI speaks for itself — our 98% retention rate backs this up.',
   },
   {
-    q: 'Do you work with small businesses?',
-    a: 'Absolutely. We work with businesses of all sizes, from solo entrepreneurs and startups to large enterprises. Our packages are scalable, and we tailor our approach to match your budget and growth ambitions.',
+    q: 'Do you work with small businesses or just large companies?',
+    a: 'We work with businesses of all sizes, from ambitious startups to established enterprises. Our packages are tailored to your budget and goals — whether you need a single service or a comprehensive digital strategy.',
   },
   {
-    q: 'Can I see case studies from my industry?',
-    a: 'Yes, we have case studies across multiple sectors including healthcare, legal, construction, e-commerce, and more. During your free strategy call, we\u2019ll share relevant examples that demonstrate what we can achieve for businesses like yours.',
+    q: 'Can we see case studies or examples of your work?',
+    a: 'Absolutely. Visit our Case Studies page to see detailed breakdowns of how we\'ve helped businesses across multiple industries achieve measurable growth in traffic, leads, and revenue.',
   },
   {
-    q: 'How do you report results each month?',
-    a: 'Every client receives a comprehensive monthly report covering key metrics, progress against KPIs, work completed, and plans for the following month. Reports are presented in plain English — no jargon, no vanity metrics. Your dedicated account manager also hosts a monthly call to walk through the results.',
+    q: 'What kind of reporting do you provide?',
+    a: 'You\'ll get access to a real-time dashboard plus detailed monthly reports covering all KPIs, progress against milestones, and strategic recommendations. We believe in complete transparency — you\'ll always know exactly what we\'re doing and why.',
   },
   {
-    q: 'Are all your team members based in the UK?',
-    a: 'Yes, our entire team is based in the UK. We\u2019re headquartered in London with team members across several UK cities. This means we understand the UK market, operate in your time zone, and are always available when you need us.',
+    q: 'Is your team based in the UK?',
+    a: 'Yes. Our entire team is based in London, UK. When you call, you speak to the people actually working on your account. No outsourcing, no middlemen — just a dedicated team that understands the UK market inside and out.',
   },
 ];
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="bg-gray-50 py-20 lg:py-28">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-14 text-center">
-          <h2
-            className="text-3xl font-bold text-gray-900 sm:text-4xl"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+    <section ref={ref} className="relative bg-off-white py-24 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p
+            className={`text-blue text-sm font-semibold uppercase tracking-widest mb-4 transition-all duration-600 ${
+              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
           >
-            Frequently Asked Questions
+            FAQ
+          </p>
+          <h2
+            className={`text-3xl sm:text-4xl font-bold text-navy mb-6 transition-all duration-600 delay-100 ${
+              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+            style={{ lineHeight: 1.15 }}
+          >
+            Got Questions? <span className="text-blue">We&apos;ve Got Answers</span>
           </h2>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        {/* Accordion */}
+        <div className="space-y-3">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
-              <div key={i} className="py-5">
+              <div
+                key={i}
+                className={`rounded-xl bg-white border transition-all duration-500 ${
+                  isOpen ? 'border-blue/20 shadow-md' : 'border-gray-200/60'
+                } ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: `${200 + i * 80}ms` }}
+              >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between text-left"
+                  className="flex w-full items-center justify-between px-6 py-5 text-left"
                 >
-                  <span className="pr-4 text-lg font-semibold text-gray-900">
+                  <span className={`font-semibold text-sm pr-4 transition-colors ${isOpen ? 'text-blue' : 'text-navy'}`}>
                     {faq.q}
                   </span>
                   <span
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-transform duration-300"
-                    style={{
-                      transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                    }}
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isOpen ? 'bg-blue text-white rotate-45' : 'bg-gray-100 text-gray-600'
+                    }`}
                   >
-                    +
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12m6-6H6" />
+                    </svg>
                   </span>
                 </button>
                 <div
-                  className="overflow-hidden transition-all duration-300"
-                  style={{
-                    display: 'grid',
-                    gridTemplateRows: isOpen ? '1fr' : '0fr',
-                  }}
+                  className="grid transition-all duration-300"
+                  style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                 >
-                  <div className="min-h-0">
-                    <p className="pt-4 text-gray-600 leading-relaxed">
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
                       {faq.a}
                     </p>
                   </div>

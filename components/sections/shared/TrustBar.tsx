@@ -1,54 +1,44 @@
 'use client';
 
-const PLACEHOLDER_LOGOS = [
+const logos = [
   'TechCorp UK',
   'Meridian Group',
   'Apex Digital',
-  'BrightPath',
-  'CloudVault',
-  'DataStream',
-  'EcoNet',
-  'FusionWorks',
-  'GridPoint',
-  'HorizonIO',
+  'Crown Estates',
+  'Pinnacle Health',
+  'Sterling Law',
+  'Nova Finance',
+  'Atlas Build',
+  'Zenith Media',
+  'Forge Studios',
 ];
 
 export default function TrustBar() {
-  const logos = [...PLACEHOLDER_LOGOS, ...PLACEHOLDER_LOGOS];
-
   return (
-    <section className="bg-gray-50 py-10 overflow-hidden">
-      <p className="text-center text-sm text-gray-500 font-body mb-8 tracking-wide uppercase">
-        Trusted by 150+ UK businesses
-      </p>
+    <section className="relative bg-navy py-12 overflow-hidden border-t border-b border-white/[0.04]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="text-center text-gray-500 text-xs font-medium uppercase tracking-widest mb-8">
+          Trusted by 150+ UK businesses
+        </p>
+      </div>
+
+      {/* Infinite scroll */}
       <div className="relative">
-        <div className="flex animate-scroll gap-12 w-max">
-          {logos.map((name, i) => (
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-navy to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-navy to-transparent z-10" />
+
+        <div className="flex animate-marquee">
+          {[...logos, ...logos].map((name, i) => (
             <div
               key={i}
-              className="flex-shrink-0 flex items-center justify-center w-36 h-12 rounded-lg bg-white border border-gray-200 px-4"
+              className="flex-shrink-0 mx-6 flex items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.02] px-8 py-3"
             >
-              <span className="text-xs font-semibold text-gray-400 font-body whitespace-nowrap">
-                {name}
-              </span>
+              <span className="text-gray-500 text-sm font-medium whitespace-nowrap">{name}</span>
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }
