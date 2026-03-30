@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   CSS Custom Properties
+   =========================== */
+:root {
+  /* Colors */
+  --color-blue: #0099FF;
+  --color-blue-dark: #0077CC;
+  --color-blue-deeper: #005599;
+  --color-navy: #0D1117;
+  --color-navy-mid: #161B22;
+  --color-navy-light: #1C2333;
+  --color-off-white: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-400: #94A3B8;
+  --color-gray-600: #475569;
+  --color-gray-800: #1E293B;
+  --color-text: #0F172A;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+
+  /* Fluid Typography Scale */
+  --text-xs: clamp(11px, 1.2vw, 13px);
+  --text-sm: clamp(13px, 1.4vw, 15px);
+  --text-base: clamp(15px, 1.6vw, 17px);
+  --text-lg: clamp(17px, 2vw, 20px);
+  --text-xl: clamp(20px, 2.5vw, 26px);
+  --text-2xl: clamp(26px, 3.5vw, 36px);
+  --text-3xl: clamp(32px, 4.5vw, 52px);
+  --text-4xl: clamp(42px, 6vw, 72px);
+  --text-hero: clamp(48px, 7vw, 88px);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-blue: 0 4px 24px rgba(0, 153, 255, 0.3);
+
+  /* Border Radii */
+  --radius-sm: 8px;
+  --radius-default: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+}
+
+/* ===========================
+   Base Styles
+   =========================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-navy);
+}
+
+h1 { font-size: var(--text-hero); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+/* ===========================
+   Custom Cursor
+   =========================== */
+*, *::before, *::after {
+  cursor: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-blue);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+a, button, [role="button"], input[type="submit"],
+a *, button *, [role="button"] * {
+  cursor: none;
+}
+
+/* Note: The 44px ring cursor on links/buttons requires JS to toggle a class.
+   When .cursor-hover is added to body, the pseudo-element becomes a ring. */
+body.cursor-hover::after {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border: 2px solid var(--color-blue);
+}
+
+/* ===========================
+   Selection Styling
+   =========================== */
+::selection {
+  background-color: var(--color-blue);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: var(--color-blue);
+  color: #ffffff;
+}
+
+/* ===========================
+   Custom Scrollbar
+   =========================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue-dark) var(--color-navy);
+}
+
+/* ===========================
+   Utility Classes
+   =========================== */
+@layer utilities {
+  .section {
+    padding-block: var(--space-3xl);
+  }
+
+  .section-sm {
+    padding-block: var(--space-2xl);
+  }
+
+  .section-lg {
+    padding-block: var(--space-4xl);
+  }
+
+  .container-narrow {
+    max-width: 800px;
+    margin-inline: auto;
+    padding-inline: var(--space-lg);
+  }
+
+  .container-wide {
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: var(--space-lg);
+  }
+
+  .text-fluid-xs { font-size: var(--text-xs); }
+  .text-fluid-sm { font-size: var(--text-sm); }
+  .text-fluid-base { font-size: var(--text-base); }
+  .text-fluid-lg { font-size: var(--text-lg); }
+  .text-fluid-xl { font-size: var(--text-xl); }
+  .text-fluid-2xl { font-size: var(--text-2xl); }
+  .text-fluid-3xl { font-size: var(--text-3xl); }
+  .text-fluid-4xl { font-size: var(--text-4xl); }
+  .text-fluid-hero { font-size: var(--text-hero); }
+}
+
+/* ===========================
+   Reduced Motion
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
